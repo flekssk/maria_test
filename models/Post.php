@@ -30,8 +30,8 @@ class Post extends ActiveRecord
     {
         return [
             [['title', 'text'], 'required'],
-            [['date'], 'date', 'format' => date('d-m-Y')],
-            [['date'], 'default', 'value' => date("d-m-Y")],
+            [['date'], 'date', 'format' => date('Y-m-d')],
+            [['date'], 'default', 'value' => date("Y-m-d")],
         ];
     }
 
