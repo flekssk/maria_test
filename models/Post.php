@@ -42,6 +42,7 @@ class Post extends ActiveRecord
     {
         return [
             'id' => 'ID',
+            'title' => 'Заголовок',
             'user_id' => 'ID Пользователя',
             'date' => 'Дата',
             'text' => 'Текст',
