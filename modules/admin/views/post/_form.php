@@ -1,5 +1,6 @@
 <?php
 
+use app\models\UploadFile;
 use yii\helpers\Html;
 use yii\widgets\ActiveForm;
 
@@ -8,7 +9,6 @@ use yii\widgets\ActiveForm;
 /* @var $model app\models\Post */
 /* @var $form yii\widgets\ActiveForm */
 
-print_r($model);
 ?>
 
 <div class="post-form">
@@ -19,7 +19,10 @@ print_r($model);
 
     <?= $form->field($model, 'text')->textInput(['maxlength' => true]) ?>
 
+    <?= Html::img( $imageModel->getImageUrl( $model->image ), ['height' => '200'] ) ?>
+
     <?= $form->field($model, 'image')->fileInput() ?>
+
 
     <div class="form-group">
         <?= Html::submitButton($model->isNewRecord ? 'Create' : 'Update', ['class' => $model->isNewRecord ? 'btn btn-success' : 'btn btn-primary']) ?>

@@ -26,6 +26,8 @@ class UploadFile extends Model
     /**
      * Загрузка файла.
      * Если передается имя текущего файла то удаляет его
+     * @param UploadedFile $file - объект загруженного файла
+     * @param null $currentImage - имя текущего загруженного файла для перезаписи
      * @return string - Имя загруженного файла
      */
     public function saveFile(UploadedFile $file, $currentImage = null )
@@ -40,5 +42,10 @@ class UploadFile extends Model
         $file->saveAs( $this->uploadDir . $fileName );
 
         return $fileName;
+    }
+
+    public function getImageUrl( $fileName )
+    {
+        return "/".$this->uploadDir.$fileName;
     }
 }
