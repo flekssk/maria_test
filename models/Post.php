@@ -12,6 +12,8 @@ use \yii\db\ActiveRecord;
  * @property integer $user_id
  * @property string $date
  * @property string $text
+ * @property string $title
+ * @property string $image
  */
 class Post extends ActiveRecord
 {
@@ -30,6 +32,8 @@ class Post extends ActiveRecord
     {
         return [
             [['title', 'text'], 'required'],
+            [['image'], 'file', 'extensions' => "png, jpg"],
+            [['image'], 'default', 'value' => $this->image],
             [['date'], 'date', 'format' => date('Y-m-d')],
             [['date'], 'default', 'value' => date("Y-m-d")],
         ];
@@ -46,6 +50,16 @@ class Post extends ActiveRecord
             'user_id' => 'ID Пользователя',
             'date' => 'Дата',
             'text' => 'Текст',
+            'image' => 'Изображение',
         ];
+    }
+
+    /**
+     * Запись имени файла в базу данных
+     */
+    public function saveImage( $file_name )
+    {
+        $this->image = $file_name;
+        $this->save();
     }
 }

@@ -2,12 +2,15 @@
 
 namespace app\modules\admin\controllers;
 
+use app\models\UploadFile;
 use Yii;
 use app\models\Post;
 use yii\data\ActiveDataProvider;
 use yii\web\Controller;
 use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
+use yii\web\UploadedFile;
+use yii\widgets\ActiveForm;
 
 /**
  * PostController работает с данными в Post модели.
@@ -44,7 +47,7 @@ class PostController extends Controller
 
     /**
      * Выводит один пост.
-     * @param integer $id
+     * @param integer $id - id поста который необходимо вывести
      * @return mixed
      */
     public function actionView($id)
@@ -63,7 +66,14 @@ class PostController extends Controller
     {
         $model = new Post();
 
+        if( Yii::$app->request->isPost ){
+            $uploadsModel = new UploadFile();
+            $image = UploadedFile::getInstance($model, 'image');
+            $model->saveImage( $uploadsModel->saveFile( $image ) );
+        }
+
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->saveFile( $model );
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('create', [
@@ -75,7 +85,7 @@ class PostController extends Controller
     /**
      * Редактирование поста.
      * Если оредактирование прошло успешно перенаправляет в отображение этого поста.
-     * @param integer $id
+     * @param integer $id - id поста для редактирования
      * @return mixed
      */
     public function actionUpdate($id)
@@ -83,6 +93,7 @@ class PostController extends Controller
         $model = $this->findModel($id);
 
         if ($model->load(Yii::$app->request->post()) && $model->save()) {
+            $this->saveFile( $model );
             return $this->redirect(['view', 'id' => $model->id]);
         } else {
             return $this->render('update', [
@@ -94,7 +105,7 @@ class PostController extends Controller
     /**
      * Удаление поста.
      * Если удаление успешно то перенаправляет ко списку всех постов.
-     * @param integer $id
+     * @param integer $id - id поста для удаления
      * @return mixed
      */
     public function actionDelete($id)
@@ -118,5 +129,18 @@ class PostController extends Controller
         } else {
             throw new NotFoundHttpException('The requested page does not exist.');
         }
+    }
+
+    /**
+     * Загрузка файла на сервер и добавление в базу данных.
+     * @param ActiveForm $model - модель куда нужно добавить файл
+     * @return Post the loaded model
+     */
+    public function saveFile( $model )
+    {
+        $uploadsModel = new UploadFile();
+
+        if( $image = UploadedFile::getInstance($model, 'image') )
+            $model->saveImage( $uploadsModel->saveFile( $image, $model->image ) );
     }
 }

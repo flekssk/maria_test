@@ -15,7 +15,8 @@ class m170314_075614_create_post_table extends Migration
             'user_id' => $this->integer(),
             'date' => $this->date(),
             'text' => $this->string(),
-            'title' => $this->string()
+            'title' => $this->string(),
+            'image' => $this->string()
         ]);
 
         $this->createIndex(
