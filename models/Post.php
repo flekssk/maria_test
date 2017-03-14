@@ -29,9 +29,9 @@ class Post extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'integer'],
-            [['date'], 'safe'],
-            [['text'], 'string', 'max' => 255],
+            [['title', 'text'], 'required'],
+            [['date'], 'date', 'format' => date('d-m-Y')],
+            [['date'], 'default', 'value' => date("d-m-Y")],
         ];
     }
 
