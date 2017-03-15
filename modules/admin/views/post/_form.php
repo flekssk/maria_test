@@ -23,7 +23,7 @@ use yii\widgets\ActiveForm;
 
     <?= $form->field($model, 'text')->textInput(['maxlength' => true]) ?>
 
-    <?= $model->image !== "" ? Html::img( $imageModel->getImageUrl( $model->image ), ['height' => '200'] ) : "" ?>
+    <?=  !empty($model->image) ? Html::img( $imageModel->getImageUrl( $model->image ), ['height' => '200'] ) : "" ?>
 
     <?= $form->field($model, 'image')->fileInput() ?>
 

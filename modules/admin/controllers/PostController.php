@@ -78,6 +78,7 @@ class PostController extends Controller
         } else {
             return $this->render('create', [
                 'model' => $model,
+                'imageModel' => new UploadFile()
             ]);
         }
     }
