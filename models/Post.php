@@ -34,7 +34,6 @@ class Post extends ActiveRecord
             [['title', 'text'], 'required'],
             [['image'], 'file', 'extensions' => "png, jpg"],
             [['image'], 'default', 'value' => $this->image],
-            [['date'], 'date', 'format' => date('Y-m-d')],
             [['date'], 'default', 'value' => date("Y-m-d")],
         ];
     }
