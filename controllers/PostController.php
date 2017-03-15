@@ -2,7 +2,6 @@
 
 namespace app\controllers;
 
-use app\models\Comments;
 use app\models\UploadFile;
 use Yii;
 use app\models\Post;
