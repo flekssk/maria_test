@@ -33,9 +33,11 @@ class Comments extends ActiveRecord
     public function rules()
     {
         return [
-            [['user_id'], 'integer'],
-            [['date'], 'safe'],
-            [['post_id', 'text'], 'string', 'max' => 255],
+            [['user_id'], 'default', 'value' => Yii::$app->user->id],
+            [['date'], 'default', 'value' => date("Y-m-d")],
+            [['post_id'], 'default', 'value' => $this->post_id],
+            [['text'], 'default', 'value' => $this->text]
+
         ];
     }
 
@@ -59,5 +61,10 @@ class Comments extends ActiveRecord
             $this->post_id = $id;
         else
             throw new Exception("Не передан id поста");
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(Users::className(),['id' => 'user_id']);
     }
 }

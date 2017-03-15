@@ -35,6 +35,7 @@ class Post extends ActiveRecord
             [['image'], 'file', 'extensions' => "png, jpg"],
             [['image'], 'default', 'value' => $this->image],
             [['date'], 'default', 'value' => date("Y-m-d")],
+            [['user_id'], 'default' , 'value' => Yii::$app->user->identity->id]
         ];
     }
 
@@ -65,5 +66,10 @@ class Post extends ActiveRecord
     public function getComments()
     {
         return $this->hasMany(Comments::className(), ['post_id' => 'id']);
+    }
+
+    public function getUser()
+    {
+        return $this->hasOne(Users::className(), ['id' => 'user_id']);
     }
 }

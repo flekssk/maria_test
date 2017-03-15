@@ -30,8 +30,12 @@ $this->params['breadcrumbs'][] = $this->title;
     <?= DetailView::widget([
         'model' => $model,
         'attributes' => [
-            'id',
-            'user_id',
+            [
+                'label' => 'Пользователь',
+                'value' => $model->user->last_name." ".$model->user->last_name,
+                'contentOptions' => ['class' => 'bg-red'],
+                'captionOptions' => ['tooltip' => 'Tooltip'],
+            ],
             'date',
             'text',
             'title',
@@ -44,6 +48,7 @@ $this->params['breadcrumbs'][] = $this->title;
         <h1>Комментарии</h1>
     <?php endif; ?>
     <?php foreach ($model->comments as $comment): ?>
+        <h4>Автор: <?= Html::tag('span', Html::encode($comment->user->first_name." ".$comment->user->last_name));?></h4>
         <blockquote>
             <?= Html::tag('p', Html::encode($comment->text)) ?>
             <?= Html::tag('footer', Html::encode("Дата: ".$comment->date)) ?>
