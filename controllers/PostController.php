@@ -2,6 +2,7 @@
 
 namespace app\controllers;
 
+use app\models\Comments;
 use app\models\UploadFile;
 use Yii;
 use app\models\Post;
@@ -52,8 +53,10 @@ class PostController extends Controller
      */
     public function actionView($id)
     {
+        $model = $this->findModel($id);
+
         return $this->render('view', [
-            'model' => $this->findModel($id),
+            'model' => $model,
         ]);
     }
 
@@ -137,4 +140,5 @@ class PostController extends Controller
         if( $image = UploadedFile::getInstance($model, 'image') )
             $model->saveImage( $uploadsModel->saveFile( $image, $model->image ) );
     }
+
 }

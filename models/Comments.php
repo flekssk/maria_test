@@ -2,7 +2,9 @@
 
 namespace app\models;
 
+use phpDocumentor\Reflection\DocBlock\Tags\Throws;
 use Yii;
+use yii\base\Exception;
 use \yii\db\ActiveRecord;
 
 /**
@@ -16,6 +18,7 @@ use \yii\db\ActiveRecord;
  */
 class Comments extends ActiveRecord
 {
+
     /**
      * Имя таблицы
      */
@@ -48,5 +51,13 @@ class Comments extends ActiveRecord
             'date' => 'Дата',
             'text' => 'Текст',
         ];
+    }
+
+    public function setPostId( $id )
+    {
+        if( $id )
+            $this->post_id = $id;
+        else
+            throw new Exception("Не передан id поста");
     }
 }

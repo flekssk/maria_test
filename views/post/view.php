@@ -1,6 +1,8 @@
 <?php
 
+use app\widgets\Comments;
 use yii\helpers\Html;
+use yii\helpers\Url;
 use yii\widgets\DetailView;
 
 /* @var $this yii\web\View */
@@ -37,4 +39,24 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]) ?>
 
+
+    <?php if( $model->comments ): ?>
+        <h1>Комментарии</h1>
+    <?php endif; ?>
+    <?php foreach ($model->comments as $comment): ?>
+        <blockquote>
+            <?= Html::tag('p', Html::encode($comment->text)) ?>
+            <?= Html::tag('footer', Html::encode("Дата: ".$comment->date)) ?>
+            <?= Html::tag('a', Html::tag("span", '', ['class' => 'glyphicon glyphicon-pencil']),[
+                'href' => Url::toRoute(['comments/edit', 'id' => $comment->id])
+            ])?>
+            <?= Html::tag('a', Html::tag("span", '', ['class' => 'glyphicon glyphicon-trash']),[
+                'href' => Url::toRoute(['comments/delete', 'id' => $comment->id]),
+                'data-confirm' => 'Вы уверены что хотитет удалить пост?',
+                'data-method' => 'post'
+            ])?>
+        </blockquote>
+    <?php endforeach; ?>
+
+    <?= Comments::widget(['postId'=> $model->id]) ?>
 </div>

@@ -61,4 +61,9 @@ class Post extends ActiveRecord
         $this->image = $file_name;
         $this->save();
     }
+
+    public function getComments()
+    {
+        return $this->hasMany(Comments::className(), ['post_id' => 'id']);
+    }
 }
