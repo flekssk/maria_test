@@ -21,7 +21,7 @@ use yii\widgets\ActiveForm;
     <?= $form->field($model, 'text')->textInput(['maxlength' => true]) ?>
 
     <div class="form-group">
-        <?= Html::submitButton( 'Create', 'btn btn-success' ) ?>
+        <?= Html::submitButton( 'Редактировать', ['class' => 'btn btn-primary']) ?>
     </div>
 
     <?php ActiveForm::end(); ?>
