@@ -15,17 +15,18 @@ $this->params['breadcrumbs'][] = $this->title;
 <div class="post-view">
 
     <h1><?= Html::encode($this->title) ?></h1>
-
-    <p>
-        <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
-        <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
-            'class' => 'btn btn-danger',
-            'data' => [
-                'confirm' => 'Вы уверены что хотитет удалить пост?',
-                'method' => 'post',
-            ],
-        ]) ?>
-    </p>
+    <?php if( Yii::$app->user->identity->is_admin || Yii::$app->user->identity->username === $model->user->username ):?>
+        <p>
+            <?= Html::a('Редактировать', ['update', 'id' => $model->id], ['class' => 'btn btn-primary']) ?>
+            <?= Html::a('Удалить', ['delete', 'id' => $model->id], [
+                'class' => 'btn btn-danger',
+                'data' => [
+                    'confirm' => 'Вы уверены что хотитет удалить пост?',
+                    'method' => 'post',
+                ],
+            ]) ?>
+        </p>
+    <?php endif; ?>
 
     <?= DetailView::widget([
         'model' => $model,
@@ -52,14 +53,16 @@ $this->params['breadcrumbs'][] = $this->title;
         <blockquote>
             <?= Html::tag('p', Html::encode($comment->text)) ?>
             <?= Html::tag('footer', Html::encode("Дата: ".$comment->date)) ?>
-            <?= Html::tag('a', Html::tag("span", '', ['class' => 'glyphicon glyphicon-pencil']),[
-                'href' => Url::toRoute(['comments/edit', 'id' => $comment->id])
-            ])?>
-            <?= Html::tag('a', Html::tag("span", '', ['class' => 'glyphicon glyphicon-trash']),[
-                'href' => Url::toRoute(['comments/delete', 'id' => $comment->id]),
-                'data-confirm' => 'Вы уверены что хотитет удалить пост?',
-                'data-method' => 'post'
-            ])?>
+            <?php if( Yii::$app->user->identity->is_admin || Yii::$app->user->identity->username === $comment->user->username ):?>
+                <?= Html::tag('a', Html::tag("span", '', ['class' => 'glyphicon glyphicon-pencil']),[
+                    'href' => Url::toRoute(['comments/edit', 'id' => $comment->id])
+                ])?>
+                <?= Html::tag('a', Html::tag("span", '', ['class' => 'glyphicon glyphicon-trash']),[
+                    'href' => Url::toRoute(['comments/delete', 'id' => $comment->id]),
+                    'data-confirm' => 'Вы уверены что хотитет удалить пост?',
+                    'data-method' => 'post'
+                ])?>
+            <?php endif; ?>
         </blockquote>
     <?php endforeach; ?>
 

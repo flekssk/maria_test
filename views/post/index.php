@@ -31,14 +31,15 @@ $this->params['breadcrumbs'][] = $this->title;
         ],
     ]); ?>
 </div>
+<?php if( !Yii::$app->user->isGuest ): ?>
+    <div class="post-create">
 
-<div class="post-create">
+        <h1>Добавить новый</h1>
 
-    <h1>Добавить новый</h1>
+        <?= $this->render('_form', [
+            'model' => $model,
+            'imageModel' => $imageModel
+        ]) ?>
 
-    <?= $this->render('_form', [
-        'model' => $model,
-        'imageModel' => $imageModel
-    ]) ?>
-
-</div>
+    </div>
+<?php endif; ?>
