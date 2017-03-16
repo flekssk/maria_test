@@ -35,7 +35,7 @@ class Users extends ActiveRecord implements IdentityInterface
     {
         return [
             [['username', 'password'], 'required'],
-            ['password', 'validatePassword']
+            ['password', 'validatePassword'],
         ];
     }
 
