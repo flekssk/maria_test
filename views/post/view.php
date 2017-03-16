@@ -13,7 +13,6 @@ $this->params['breadcrumbs'][] = ['label' => 'Posts', 'url' => ['index']];
 $this->params['breadcrumbs'][] = $this->title;
 ?>
 <div class="post-view">
-
     <h1><?= Html::encode($this->title) ?></h1>
     <?php if( Yii::$app->user->identity->is_admin || Yii::$app->user->identity->username === $model->user->username ):?>
         <p>
