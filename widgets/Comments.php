@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: Laotio
- * Date: 15.03.2017
- * Time: 13:09
- */
 
 namespace app\widgets;
 
@@ -13,10 +7,18 @@ use app\controllers\CommentsController;
 use yii\base\Widget;
 use yii\data\ActiveDataProvider;
 
+/**
+ * Виджет добавления коментарие
+ */
 class Comments extends Widget
 {
     public $postId;
 
+
+    /**
+     * Виводит вид добавления коментариев
+     * @return string - вид добавления коментариев
+     */
     public function run()
     {
         $model = new \app\models\Comments();

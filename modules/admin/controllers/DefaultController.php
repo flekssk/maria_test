@@ -5,12 +5,12 @@ namespace app\modules\admin\controllers;
 use yii\web\Controller;
 
 /**
- * Default controller for the `admin` module
+ * Констроллер по умолчанию для админки
  */
 class DefaultController extends Controller
 {
     /**
-     * Renders the index view for the module
+     * Выводит вид index
      * @return string
      */
     public function actionIndex()

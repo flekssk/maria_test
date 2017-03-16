@@ -12,13 +12,10 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * UsersController implements the CRUD actions for Users model.
+ * Контроллер пользователей в админке
  */
 class UsersController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
@@ -32,8 +29,8 @@ class UsersController extends Controller
     }
 
     /**
-     * Lists all Users models.
-     * @return mixed
+     * Выводит всех пользоватей.
+     * @return mixed - вид index
      */
     public function actionIndex()
     {
@@ -47,9 +44,9 @@ class UsersController extends Controller
     }
 
     /**
-     * Displays a single Users model.
-     * @param integer $id
-     * @return mixed
+     * Выводит одного пользователя.
+     * @param integer $id - id пользователя
+     * @return mixed - вид view
      */
     public function actionView($id)
     {
@@ -59,9 +56,9 @@ class UsersController extends Controller
     }
 
     /**
-     * Creates a new Users model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * Создание нового пользователя.
+     * Если создание прошло успешно вивод страницу информации.
+     * @return mixed - модель create
      */
     public function actionCreate()
     {
@@ -77,10 +74,10 @@ class UsersController extends Controller
     }
 
     /**
-     * Updates an existing Users model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * Обновление пользователя.
+     * Если обновление прошло успешно возвращает вид update.
+     * @param integer $id - id пользователя
+     * @return mixed - вид update
      */
     public function actionUpdate($id)
     {
@@ -96,10 +93,10 @@ class UsersController extends Controller
     }
 
     /**
-     * Deletes an existing Users model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
-     * @param integer $id
-     * @return mixed
+     * Удаляет пользователя.
+     * Если удаление прошло успешно возвращает вид index.
+     * @param integer $id - id пользователя
+     * @return mixed - вид index
      */
     public function actionDelete($id)
     {
@@ -109,18 +106,18 @@ class UsersController extends Controller
     }
 
     /**
-     * Finds the Users model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Users the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * Поиск модели пользователя.
+     * Если такого пользователя нет возвращает ошибку.
+     * @param integer $id - id пользователя
+     * @return Users - модель пользователя
+     * @throws NotFoundHttpException - данный пользователь не найден
      */
     protected function findModel($id)
     {
         if (($model = UsersAdministration::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Данный пользователь не найден');
         }
     }
 }

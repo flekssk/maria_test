@@ -118,11 +118,11 @@ class PostController extends Controller
     }
 
     /**
-     * Finds the Post model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
+     * Поиск модели поста по его id.
+     * Если такого поста нет выводит ощибку 404.
      * @param integer $id
-     * @return Post the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return Возвращает модель искомого поста
+     * @throws NotFoundHttpException - Если поста нет в базе данных выводит ошибку
      */
     protected function findModel($id)
     {

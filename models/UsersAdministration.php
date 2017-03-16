@@ -1,9 +1,16 @@
 <?php
 
 namespace app\models;
-
+/**
+ * Модель регистрации пользователя.
+ */
 class UsersAdministration extends Users
 {
+
+    /**
+     * Правила полей регистрации
+     * @return array - правила полей
+     */
     public function rules()
     {
         return [

@@ -55,7 +55,13 @@ class Comments extends ActiveRecord
         ];
     }
 
-    public function setPostId( $id )
+
+    /**
+     * Устанавливает post_id данного поста
+     * @param $id - id поста
+     * @throws Exception Возвращает ошибку если не передан id поста
+     */
+    public function setPostId($id )
     {
         if( $id )
             $this->post_id = $id;
@@ -63,6 +69,11 @@ class Comments extends ActiveRecord
             throw new Exception("Не передан id поста");
     }
 
+
+    /**
+     * Возвращает модель пользователя
+     * @return \yii\db\ActiveQuery - модель пользователя
+     */
     public function getUser()
     {
         return $this->hasOne(Users::className(),['id' => 'user_id']);

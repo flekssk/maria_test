@@ -64,11 +64,20 @@ class Post extends ActiveRecord
         $this->save();
     }
 
+
+    /**
+     * Возвращает модель коментариев данного поста
+     * @return \yii\db\ActiveQuery - модель коментариев данного поста
+     */
     public function getComments()
     {
         return $this->hasMany(Comments::className(), ['post_id' => 'id']);
     }
 
+    /**
+     * Возвращает модель пользователя создавшего данный пост
+     * @return \yii\db\ActiveQuery - модель пользователя
+     */
     public function getUser()
     {
         return $this->hasOne(Users::className(), ['id' => 'user_id']);

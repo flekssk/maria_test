@@ -11,13 +11,10 @@ use yii\web\NotFoundHttpException;
 use yii\filters\VerbFilter;
 
 /**
- * CommentsController implements the CRUD actions for Comments model.
+ * CommentsController набор CRUD действий с моделью Comments.
  */
 class CommentsController extends Controller
 {
-    /**
-     * @inheritdoc
-     */
     public function behaviors()
     {
         return [
@@ -31,8 +28,8 @@ class CommentsController extends Controller
     }
 
     /**
-     * Lists all Comments models.
-     * @return mixed
+     * Вывод всех коментов
+     * @return mixed - возвращает вид index
      */
     public function actionIndex()
     {
@@ -46,8 +43,8 @@ class CommentsController extends Controller
     }
 
     /**
-     * Displays a single Comments model.
-     * @param integer $id
+     * Выводит один пост.
+     * @param integer $id - id комента
      * @return mixed
      */
     public function actionView($id)
@@ -58,9 +55,9 @@ class CommentsController extends Controller
     }
 
     /**
-     * Creates a new Comments model.
-     * If creation is successful, the browser will be redirected to the 'view' page.
-     * @return mixed
+     * Созадет коментарий.
+     * Если создание прошло усппешно возвращает на страницу поста куда был добавлен коментарий.
+     * @return mixed - возвращает вид создания коментария
      */
     public function actionCreate()
     {
@@ -78,10 +75,10 @@ class CommentsController extends Controller
     }
 
     /**
-     * Updates an existing Comments model.
-     * If update is successful, the browser will be redirected to the 'view' page.
-     * @param integer $id
-     * @return mixed
+     * Редактирует коментарий.
+     * Если редактирование прошло успешно отображает данный коментарий.
+     * @param integer $id - id редактируемого коментария
+     * @return mixed - возвращает вид редактирования коментария
      */
     public function actionUpdate($id)
     {
@@ -97,8 +94,8 @@ class CommentsController extends Controller
     }
 
     /**
-     * Deletes an existing Comments model.
-     * If deletion is successful, the browser will be redirected to the 'index' page.
+     * Удаляет коментрий.
+     * Если удаление прошло успешно отображает пост где был данный коментарий.
      * @param integer $id
      * @return mixed
      */
@@ -111,18 +108,18 @@ class CommentsController extends Controller
     }
 
     /**
-     * Finds the Comments model based on its primary key value.
-     * If the model is not found, a 404 HTTP exception will be thrown.
-     * @param integer $id
-     * @return Comments the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * Поиск модели коментриев.
+     * Если таковой нет отправляет ошибку.
+     * @param integer $id - id коментария
+     * @return - модель коментария
+     * @throws NotFoundHttpException - ошибка не сущесвующего коментария
      */
     protected function findModel($id)
     {
         if (($model = Comments::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Запрашиваемая модель не существует');
         }
     }
 }

@@ -53,11 +53,20 @@ class Users extends ActiveRecord implements IdentityInterface
         ];
     }
 
+    /**
+     * Возвращает модель пользователя по username
+     * @param $username - имя пользователя
+     * @return array|null|ActiveRecord - модель пользователя
+     */
     public function findByUsername($username)
     {
         return Users::find()->where(['username' => $username])->one();
     }
 
+    /**
+     * Авторизация пользователя
+     * @return bool
+     */
     public function login()
     {
         if( $this->validate() )
@@ -66,6 +75,11 @@ class Users extends ActiveRecord implements IdentityInterface
         return false;
     }
 
+    /**
+     * Проверка пароля.
+     * Сверяет введённый пароль и пароль из базы данных
+     * @param $attribute - атрибуты поля password
+     */
     public function validatePassword($attribute)
     {
         $user = $this->getUser();
@@ -77,6 +91,12 @@ class Users extends ActiveRecord implements IdentityInterface
     }
 
 
+    /**
+     * Авторизация через access token
+     * @param mixed $token
+     * @param null $type
+     * @return null|static
+     */
     public static function findIdentityByAccessToken($token, $type = null)
     {
         foreach (self::$users as $user) {
@@ -89,25 +109,29 @@ class Users extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Returns an ID that can uniquely identify a user identity.
-     * @return string|int an ID that uniquely identifies a user identity.
+     * Возвращает id пользователя
+     * @return string|int id пользователя.
      */
     public function getId()
     {
         return $this->id;
     }
 
+    /**
+     * Возвращает авторизационный код
+     * @return string
+     */
     public function getAuthKey()
     {
         return $this->auth_key;
     }
 
     /**
-     * Validates the given auth key.
+     * Проверка авторизационного ключа.
      *
-     * This is required if [[User::enableAutoLogin]] is enabled.
-     * @param string $authKey the given auth key
-     * @return bool whether the given auth key is valid.
+     * Срабатывает если включено автологирование.
+     * @param string $authKey - авторизационный код
+     * @return bool
      * @see getAuthKey()
      */
     public function validateAuthKey($authKey)
@@ -115,17 +139,19 @@ class Users extends ActiveRecord implements IdentityInterface
     }
 
     /**
-     * Finds an identity by the given ID.
-     * @param string|int $id the ID to be looked for
-     * @return IdentityInterface the identity object that matches the given ID.
-     * Null should be returned if such an identity cannot be found
-     * or the identity is not in an active state (disabled, deleted, etc.)
+     * Поиск модели пользователя
+     * @param string|int id пользователя
+     * @return IdentityInterface модель пользователя.
      */
     public static function findIdentity($id)
     {
         return Users::findOne($id);
     }
 
+    /**
+     * Возвращает модель пользователя
+     * @return array|bool|null|ActiveRecord - модель пользователя
+     */
     public function getUser()
     {
         if( $this->user === false ){

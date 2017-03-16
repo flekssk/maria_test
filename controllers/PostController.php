@@ -30,7 +30,7 @@ class PostController extends Controller
 
     /**
      * Вывод все посты.
-     * @return mixed
+     * @return mixed - возвращает вид index
      */
     public function actionIndex()
     {
@@ -47,8 +47,8 @@ class PostController extends Controller
 
     /**
      * Выводит один пост.
-     * @param integer $id
-     * @return mixed
+     * @param integer $id - id выводимого поста
+     * @return mixed - возвращает вид view
      */
     public function actionView($id)
     {
@@ -62,7 +62,7 @@ class PostController extends Controller
     /**
      * Добавление нового поста.
      * Если создание прошло успешно то перенаправляет в отображение этого поста.
-     * @return mixed
+     * @return mixed - возвращает вид create
      */
     public function actionCreate()
     {
@@ -81,7 +81,7 @@ class PostController extends Controller
      * Редактирование поста.
      * Если оредактирование прошло успешно перенаправляет в отображение этого поста.
      * @param integer $id - id поста для редактирования
-     * @return mixed
+     * @return mixed - возвращает вид update
      */
     public function actionUpdate($id)
     {
@@ -102,7 +102,7 @@ class PostController extends Controller
      * Удаление поста.
      * Если удаление успешно то перенаправляет ко списку всех постов.
      * @param integer $id - id поста для удаления
-     * @return mixed
+     * @return mixed - возвращает вид index
      */
     public function actionDelete($id)
     {
@@ -115,23 +115,23 @@ class PostController extends Controller
      * Поиск модели поста по его id.
      * Если такого поста нет выводит ощибку 404.
      * @param integer $id
-     * @return Post the loaded model
-     * @throws NotFoundHttpException if the model cannot be found
+     * @return Возвращает модель искомого поста
+     * @throws NotFoundHttpException - Если поста нет в базе данных выводит ошибку
      */
     protected function findModel($id)
     {
         if (($model = Post::findOne($id)) !== null) {
             return $model;
         } else {
-            throw new NotFoundHttpException('The requested page does not exist.');
+            throw new NotFoundHttpException('Данный пост не существует');
         }
     }
 
     /**
      * Загрузка файла на сервер и добавление в базу данных.
      * @param ActiveForm $model - модель куда нужно добавить файл
-     * @return Post the loaded model
      */
+
     private function saveFile( $model )
     {
         $uploadsModel = new UploadFile();

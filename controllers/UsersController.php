@@ -9,8 +9,18 @@ use app\models\Users;
 use Yii;
 use yii\web\Controller;
 
+/**
+ * Контроллер пользователей
+ */
+
 class UsersController extends Controller
 {
+
+    /**
+     * Авторизация пользователя
+     * Если были переданы данные, проверяет их и если проверка успешна пересылает назад
+     * @return - Возвращает вид login
+     */
     public function actionLogin()
     {
         $model = new Users();
@@ -24,6 +34,22 @@ class UsersController extends Controller
 
     }
 
+    /**
+     * Выход
+     * @return Возвращает на главную страницу
+     */
+    public function actionLogout()
+    {
+        Yii::$app->user->logout();
+
+        return $this->goHome();
+    }
+
+    /**
+     * Регистрация пользователей
+     * Если данный отправлены, проверяет их и если проверка успешна перенаправляет на страницу login
+     * @return Возвращает вид registration
+     */
     public function actionRegistration()
     {
         $model = new Registrations();

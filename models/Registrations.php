@@ -2,9 +2,16 @@
 
 namespace app\models;
 
+/**
+ * Это модель регистрации пользователей.
+ */
 
 class Registrations extends Users
 {
+    /**
+     * Правила полей
+     * @return array - правила полей
+     */
     public function rules()
     {
         return [

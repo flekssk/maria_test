@@ -44,7 +44,12 @@ class UploadFile extends Model
         return $fileName;
     }
 
-    public function getImageUrl( $fileName )
+    /**
+     * Возвращает путь к файлу
+     * @param $fileName - имя файла
+     * @return string - путь к файлу
+     */
+    public function getImageUrl($fileName )
     {
         return "/".$this->uploadDir.$fileName;
     }
