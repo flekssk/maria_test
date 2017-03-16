@@ -12,12 +12,20 @@ class m170314_075656_create_users_table extends Migration
     {
         $this->createTable('users', [
             'id' => $this->primaryKey(),
-            'login' => $this->string(),
+            'username' => $this->string(),
             'password' => $this->string(),
             'first_name' => $this->string(),
             'last_name' => $this->string(),
+            'is_admin' => $this->boolean(),
             'auth_key' => $this->string(),
             'access_token' => $this->string()
+        ]);
+
+        $this->insert('users', [
+            'id' => '1',
+            'username' => 'admin',
+            'password' => 'admin',
+            'is_admin' => '1'
         ]);
     }
 

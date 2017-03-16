@@ -14,7 +14,7 @@ class m170314_075711_create_comments_table extends Migration
             'id' => $this->primaryKey(),
             'user_id' => $this->integer(),
             'post_id' => $this->string(),
-            'date' => $this->date(),
+            'date' => $this->integer(),
             'text' => $this->string()
         ]);
 
