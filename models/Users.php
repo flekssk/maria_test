@@ -48,7 +48,8 @@ class Users extends ActiveRecord implements IdentityInterface
             'username' => 'Логин',
             'password' => 'Пароль',
             'first_name' => 'Фамилия',
-            'last_name' => 'Имя'
+            'last_name' => 'Имя',
+            'is_admin' => 'Администратор'
         ];
     }
 
@@ -133,4 +134,5 @@ class Users extends ActiveRecord implements IdentityInterface
 
         return $this->user;
     }
+
 }

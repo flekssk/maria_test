@@ -36,6 +36,7 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+            ['label' => 'Управление пользователями', 'url' => ['/admin/users/index']],
             ['label' => 'Посты', 'url' => ['/admin/post/index']],
             Yii::$app->user->isGuest ? (
             ['label' => 'Авторизация', 'url' => ['/site/login']]
