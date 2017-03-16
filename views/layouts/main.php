@@ -36,6 +36,9 @@ AppAsset::register($this);
     echo Nav::widget([
         'options' => ['class' => 'navbar-nav navbar-right'],
         'items' => [
+                !empty(Yii::$app->user->identity->is_admin) && Yii::$app->user->identity->is_admin?
+                    ['label' => 'Администрирование', 'url' => ['/admin']]:"",
+                ['label' => 'Посты', 'url' => ['/post/']],
             Yii::$app->user->isGuest ? (
                 ['label' => 'Войти', 'url' => ['/users/login']]
             ) : (
